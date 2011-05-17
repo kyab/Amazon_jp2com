@@ -1,0 +1,25 @@
+<script>
+
+var bgValue = "foo";
+this.bgValue = "goo";
+
+//do something on browserAction button clicked
+
+//!This event will not fire if the browser action has a popup. see Google Home Page
+//http://code.google.com/chrome/extensions/browserAction.html
+chrome.browserAction.onClicked.addListener(function(tab) {
+	console.log("bg.html onClicked");
+  var action_url = "javascript:window.print();";
+  chrome.tabs.update(tab.id, {url: action_url});
+});
+
+
+/*chrome.tabs.onCreated.addListener(function(tab){
+	appendToLog("tabs.onCreated");
+	document.write("tabs.onCreated");
+});*/
+
+
+
+
+</script>

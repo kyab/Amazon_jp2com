@@ -1,0 +1,17 @@
+{
+    "name" : "Amazon jp2com",
+    "version" : "0.0.0.9",
+    
+    "description" : "Open com version of amazon",
+    "browser_action" : {
+      "default_icon" : "Cool_48.png",
+      "default_title" : "Hello World",
+      "popup" : "popup.html"
+    },
+    "icons" : { "48" : "Cool_48.png",
+                "128" : "Cool_128.png"},
+    
+    "background_page" : "bg.html", // not used actually
+    
+    "permissions" : ["tabs"]
+}

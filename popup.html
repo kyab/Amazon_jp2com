@@ -1,0 +1,76 @@
+<html>
+<header>
+	<meta charset="utf-8">
+	<style>
+	body {
+	  min-width:357px;
+	  overflow-x:hidden;
+	}
+
+	img {
+	  margin:5px;
+	  border:2px solid black;
+	  vertical-align:middle;
+	  width:75px;
+	  height:75px;
+	}
+	</style>
+
+	<script>
+		chrome.browserAction.setTitle({"title":"Amazon jp2com"});
+
+		console.log("hi this is from popup.");
+	
+		chrome.tabs.getSelected(null,	//current tab
+			function(tab){
+				console.log("tab:" + tab.title);
+				console.log("url:" + tab.url);
+
+				var original = tab.url;
+				var flip_url = ""
+				var flipped_language = ""
+
+
+				//flip amazon.com to amazon.co.jp , or amazon.co.jp to amazon.com
+				if (original.search("amazon\.co\.jp") != -1){
+					flip_url = original.replace(/\.co\.jp/,".com");
+					flipped_language = "English(amazon.com)";
+				
+				}else if(original.search("amazon\.com") != -1){
+					flip_url = original.replace(/\.com/,".co.jp");
+					flipped_language = "日本語(amazon.co.jp)";
+				}
+			
+				console.log("flipped = " +  flip_url);
+				if (flip_url == "") return;
+
+				//show flipped and original url on the popup 
+				var flip_div = document.getElementById("flipped");
+				flip_div.innerHTML = '<a target="_blank" href="' + flip_url + '"> to ' + flipped_language + '</a>';
+			
+				//show the original
+				//var original_div = document.getElementById("original");
+				//original_div.innerHTML = original;
+				console.log("original = " + original);
+			
+			}
+		);
+	
+		//calling background script
+		//var bg_val = chrome.extension.getBackgroundPage().bgValue;
+		//document.write(bg_val);
+
+	
+	</script>
+</header>
+
+<body>
+	<!--<div id="clicked">clicked replacement holder</div>-->
+	<div id="flipped">here is not amazon.co.jp nor amazon.com! </div>
+	<hr/>
+	<div id="original"></div>
+
+	<p>Amazon jp2com</p>
+	<a href='http://www.google.co.jp/;'>close</a>
+	</body>
+</html>
